@@ -1,6 +1,6 @@
 # ☁️ My Cloud Learning Journey (GDSC Prep)
 
-Hi! I'm currently exploring the Cloud domain as part of my goal to join the GDSC at my college.  
+Hi! I'm currently exploring the Cloud domain as part of my interest to delve deep into this important sphere of dev.  
 This repo contains my day-by-day notes, project experiments, and badges earned through Google Cloud Skills Boost.
 
 ---
