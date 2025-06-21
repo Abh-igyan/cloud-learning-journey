@@ -31,4 +31,9 @@ Learning usecases of Cloud STorage and SQL & NoSQL Storage
     * globally unique name
     * specific geographic location for where it should be stored, and
 * an ideal location for a bucket is where latency is minimized.
-*  You should choose a bucket location closest to the users or services accessing it — so it loads faster. 
+*  You should choose a bucket location closest to the users or services accessing it — so it loads faster.
+*  The storage objects offered by Cloud Storage are “immutable” and a new version is created with every change made.
+*  within a bucket, we may allow versioning or by default every new change made will overwrite the existing versions.
+*  Versioning:  We can list the archived versions of an object, restore an object to an older state, or permanently delete a version of an object, as needed.
+
+## LAB Cloud Storage: Qwik Start - CLI/SDK
