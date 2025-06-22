@@ -14,7 +14,7 @@ This repo contains my day-by-day notes, project experiments, and badges earned t
 
 ## 📚 Learning Track
 
-- ✅ GCP Foundations: Infrastructure
+- ✅ Google Cloud Computing Foundations: Infrastructure in Google Cloud
 - 🔄 Firebase for Web (In Progress)
 - 🔜 Deploy to Kubernetes
 
