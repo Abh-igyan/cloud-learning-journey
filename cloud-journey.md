@@ -109,10 +109,11 @@ Create and connect to a Cloud SQL for MySQL instance and perform basic SQL opera
 Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select Enterprise edition (vvvimp: no "plus" otherwise lab terminates) > In Preset choose **Development (4 vCPU, 16 GB RAM, 100 GB Storage, Single zone)** >> choose database version as MySQL 8 > Enter a Instance_ID > In the password field click on the Generate link (note the password) > At the Cloud Shell prompt, connect to your Cloud SQL instance by: `gcloud sql connect Instance_ID --user=root` > click authorize> enter the root/instance password > Now in mysql prompt, we create and upload data.
 
 * `CREATE DATABASE guestbook;`
-* `USE guestbook;
-CREATE TABLE entries (guestName VARCHAR(255), content VARCHAR(255),
-    entryID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(entryID));
-    INSERT INTO entries (guestName, content) values ("first guest", "I got here!");
-INSERT INTO entries (guestName, content) values ("second guest", "Me too!");`
+* ```sql
+     USE guestbook;
+     CREATE TABLE entries (guestName VARCHAR(255), content VARCHAR(255),
+     entryID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(entryID));
+     INSERT INTO entries (guestName, content) values ("first guest", "I got here!");
+     INSERT INTO entries (guestName, content) values ("second guest", "Me too!");
 * `SELECT * FROM entries;`
 * Created a Cloud SQL for MySQL instance and database, and then uploaded data.
