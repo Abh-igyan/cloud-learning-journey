@@ -85,8 +85,34 @@ Granting all users read permission for the object stored in my bucket: `gsutil a
 * Go to Navigation > Cloud storage > bucket name > **image with the Public link box** is visible
 
 ### Task 8. Remove public access
-gsutil acl ch -d AllUsers gs://YOUR-BUCKET-NAME/ada.jpg
+`gsutil acl ch -d AllUsers gs://YOUR-BUCKET-NAME/ada.jpg`
 refresh console
 ### Delete objects
 E.g., delete the image file in your bucket: `gcloud storage rm gs://YOUR-BUCKET-NAME/ada.jpg`
 * refresh console > no image on cloud
+
+# Day 3
+## SQL Managed Services
+* Databases are extremely important and **applications/softwares** run databases to get a fast answer to questions like: what's this user's name, given his sign-in info, entries from a directory, what ad to display next to user, etc.
+* These apps must be able to write data in and read data out of databases.
+* ![Screenshot 2025-06-23 134557](https://github.com/user-attachments/assets/31ea5de7-78ca-4193-8fad-d60d44699b8c)
+* Google Cloud offers two managed relational database services: Cloud SQL and Spanner.
+  ### Cloud SQL
+  * ![Screenshot 2025-06-23 135946](https://github.com/user-attachments/assets/83c3d6d4-aa01-45f1-bd5a-d2d518e3fd33)
+  * ![Screenshot 2025-06-23 140055](https://github.com/user-attachments/assets/7fda409c-4f57-4cd5-bf72-f39b33ada151)
+## Lab- Cloud SQL for MySQL: Qwik Start
+Create and connect to a Cloud SQL for MySQL instance and perform basic SQL operations using the Google Cloud console and the ```mysql``` client.
+* Activate Cloud Shell.
+### Task 1. Create a Cloud SQL instance
+* Instance ID is used to uniquely identify your instance within the project.
+  
+Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select Enterprise edition (vvvimp: no "plus" otherwise lab terminates) > In Preset choose **Development (4 vCPU, 16 GB RAM, 100 GB Storage, Single zone)** >> choose database version as MySQL 8 > Enter a Instance_ID > In the password field click on the Generate link (note the password) > At the Cloud Shell prompt, connect to your Cloud SQL instance by: `gcloud sql connect Instance_ID --user=root` > click authorize> enter the root/instance password > Now in mysql prompt, we create and upload data.
+
+* `CREATE DATABASE guestbook;`
+* `USE guestbook;
+CREATE TABLE entries (guestName VARCHAR(255), content VARCHAR(255),
+    entryID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(entryID));
+    INSERT INTO entries (guestName, content) values ("first guest", "I got here!");
+INSERT INTO entries (guestName, content) values ("second guest", "Me too!");`
+* `SELECT * FROM entries;`
+* Created a Cloud SQL for MySQL instance and database, and then uploaded data.
