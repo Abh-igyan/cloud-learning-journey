@@ -43,9 +43,9 @@ Learning usecases of Cloud STorage and SQL & NoSQL Storage
 * ![image](https://github.com/user-attachments/assets/9991c4c7-320f-4c2e-aedb-1b89b2686e40)
 * Always Activate Cloud Shell from the Activate Cloud Shell icon at the top of the Google Cloud console.
 * gcloud is the command-line tool for Google Cloud (supports auto=completion).
-* For lisiting active account name: gcloud auth list
-* For listing project ID: gcloud config list project
-* Setting project region for a lab: gcloud config set compute/region "REGION"
+* For lisiting active account name: `gcloud auth list`
+* For listing project ID: `gcloud config list project`
+* Setting project region for a lab: `gcloud config set compute/region "REGION"`
 
 ## LAB Cloud Storage: Qwik Start - CLI/SDK:
 ### Task 1. Create a bucket
@@ -58,8 +58,35 @@ Learning usecases of Cloud STorage and SQL & NoSQL Storage
 * cannot begin with the "goog" prefix.
 * cannot contain "google" or close misspellings of "google".
 * Also, for DNS compliance and future compatibility, you should not use underscores (_) or have a period adjacent to another period or dash. For example, ".." or "-."          or ".-" are not valid in DNS names.
-2) gcloud storage buckets create gs://<YOUR-BUCKET-NAME>
+2) `gcloud storage buckets create gs://<YOUR-BUCKET-NAME>`
 3) Bucket created with default settings: see in Navigation menu > Cloud Storage > bucket name > Configuration tab.
-4) Each bucket has a default storage class, which you can specify when you create your bucket (using gsutil): gsutil mb -c nearline -l asia-south1 gs://my-unique-bucket-name/ (-c nearline: sets Nearline as default storage class, -l asia-south1: sets location (e.g. Mumbai))
-  
+4) Each bucket has a default storage class, which you can specify when you create your bucket (using gsutil):
+   * `gsutil mb -c nearline -l asia-south1 gs://my-unique-bucket-name/`
+   * (-c nearline: sets Nearline as default storage class, -l asia-south1: sets location (e.g. Mumbai))
 
+### Task 2. Upload an object into your bucket
+1) To download an image name.jpg into bucket: `curl Link_of_image --output name.jpg`
+2) To upload the downloaded image to bucket: `gcloud storage cp name.jpg gs://YOUR-BUCKET-NAME`
+3) just stored an object in bucket!
+4) Removing the downloaded image: `rm name.jpg`
+
+### Task 3. Download an object from your bucket
+ Downloading stored image into cloud shell: `gcloud storage cp -r gs://YOUR-BUCKET-NAME/name.jpg .`
+### Task 4. Copy an object to a folder in the bucket 
+Created MyDevImages folder and copied image to it: `gcloud storage cp gs://YOUR-BUCKET-NAME/name.jpg gs://YOUR-BUCKET-NAME/MyDevImages/`
+### Task 5. List contents of a bucket or folder
+ `gcloud storage ls gs://YOUR-BUCKET-NAME`
+
+### Task 6. List details for an object
+-l flag lists details of name.jpg:  `gcloud storage ls -l gs://YOUR-BUCKET-NAME/ada.jpg`
+### Task 7. Make your object publicly accessible
+Granting all users read permission for the object stored in my bucket: `gsutil acl ch -u AllUsers:R gs://YOUR-BUCKET-NAME/name.jpg`
+* An access control list (ACL) is a mechanism to define who has access to your buckets and objects.
+* Go to Navigation > Cloud storage > bucket name > **image with the Public link box** is visible
+
+### Task 8. Remove public access
+gsutil acl ch -d AllUsers gs://YOUR-BUCKET-NAME/ada.jpg
+refresh console
+### Delete objects
+E.g., delete the image file in your bucket: `gcloud storage rm gs://YOUR-BUCKET-NAME/ada.jpg`
+* refresh console > no image on cloud
