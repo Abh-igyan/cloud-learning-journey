@@ -112,8 +112,42 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
 * ```sql
      USE guestbook;
      CREATE TABLE entries (guestName VARCHAR(255), content VARCHAR(255),
-     entryID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(entryID));
-     INSERT INTO entries (guestName, content) values ("first guest", "I got here!");
+          entryID INT NOT NULL AUTO_INCREMENT, PRIMARY KEY(entryID));
+          INSERT INTO entries (guestName, content) values ("first guest", "I got here!");
      INSERT INTO entries (guestName, content) values ("second guest", "Me too!");
 * `SELECT * FROM entries;`
 * Created a Cloud SQL for MySQL instance and database, and then uploaded data.
+
+## Spanner as a managed service:
+* Spanner is a fully managed relational database service that scales horizontally, is strongly consistent, and speaks SQL.
+* **Vertical scaling** is where you make a single instance larger or smaller, while **horizontal scaling** is when you scale by adding and removing servers. (remember scalability)
+* important use: manage end-user metadata.
+* ![image](https://github.com/user-attachments/assets/52cb3855-82f2-46fa-a604-f9ef84f54c53)
+* Working: Synchronous replication --Google uses replication within and across regions to achieve availability, so if one region goes offline, the user’s data can still be served from another region.
+  
+## NoSQL Managed Database Services Options:
+**Firestore** and **Bigtable** 
+
+  ### Firestore
+  * Firestore is a fully managed, scalable serverless NoSQL document store that supports ACID(used in relational databases -banks, ecommerce(reliable)) transactions.
+  * flexible, horizontally scalable, NoSQL cloud database for mobile, web, and server development.
+  * It stores data as documents and these documents are then organized into collections.
+    
+    ![image](https://github.com/user-attachments/assets/a96b2e61-a057-4aa9-8533-06fea64e458f)
+    
+  * Firestore uses online & offline data synchronization to update data on any connected device.
+  * also designed to make simple, one-time fetch queries efficiently.
+  * It caches (*stores a copy of data locally*)  data that an app is actively using, so the app can write, read, listen to, and query data even if the device is offline and syncs any local changes back when the online.
+
+   ### Bigitable: Google's NoSQL big data database service.
+   * A petabyte scale, sparse wide column NoSQL database that offers extremely low write latency.
+   * used to work with more than 1 TB of semi-structured or structured data.
+   * powers many core Google services, including Search, Analytics, Maps, and Gmail.
+   * Handles massive workloads and consistent low latency and high throughtput (work completed by a system per sec). 
+   * great choice for both operational and analytical applications, including Internet of Things, user analytics, and financial data analysis.
+     ![image](https://github.com/user-attachments/assets/af8d326b-2fd9-44f1-afe9-85e0b1d5c9bc)
+   * can interact with other Google Cloud services and third-party clients.
+   * **APIs** serve data to applications, dashboards, and data services. Using APIs, data can be read from and written to Bigtable through a data service layer like Managed VMs, the HBase REST Server, or a Java Server using the HBase client.
+   * Data streamed in through various popular **stream processing frameworks** like Dataflow Streaming, Spark Streaming, and Storm.
+   * If no streaming, data can also be read from and written to Bigtable through **batch processes** like Hadoop MapReduce, Dataflow, or Spark.
+   * BigQuery is different and sits on the edge between data storage and data processing The usual reason to store data in BigQuery is so you can use its big data analysis and interactive querying capabilities. It is not purely a data storage product.
