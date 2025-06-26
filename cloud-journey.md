@@ -157,11 +157,14 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
  * AppDevs structure the software they write so that it presents a clean, well-defined interface that hides unnecessary detail, and then they provide a documentation of that interface. That’s an API. Its underlying implementation can change.
  * Used to simplify the way different,distinct software resources communicate.
  * Changes to the API are made with versions: we can specify the version we wanna use in our software.
- * **REST API**: * A set of constraints that a service must comply with.
-                 * Service complying with REST constraints, said to be RESTful.
-                 * uses HTTP requests to perform GET, PUT, POST, and DELETE data
-                 * REST applies the web architecture to services.
-                 * APIs intended to be spread widely to consumers and deployed to devices with limited computing resources, like mobile, are well suited to a REST structure.       * State information does not need to be stored or referenced for the API to run.
-                 * Great for cloud applications because they are stateless.
-                 * Authentication via OAuth and security by leveraging tokens.
-                  * DIfficulty in deploying and managing APIs: Interface definition language/format, Authentication & Authorization, Management & Scalability to meet demand, Logging and monitoring
+ * **REST API**:
+   * A set of constraints that a service must comply with.
+   * Service complying with REST constraints, said to be RESTful.
+   * uses HTTP requests to perform GET, PUT, POST, and DELETE data
+   * REST applies the web architecture to services.
+   * APIs intended to be spread widely to consumers and deployed to devices with limited computing resources, like mobile, are well suited to a REST structure.
+   * State information does not need to be stored or referenced for the API to run.
+   * Great for cloud applications because they are stateless.
+   * Authentication via OAuth and security by leveraging tokens.
+ * DIfficulty in deploying and managing APIs: Interface definition language/format, Authentication & Authorization, Management & Scalability to meet demand, Logging and monitoring
+
