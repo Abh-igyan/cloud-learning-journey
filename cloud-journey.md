@@ -1,5 +1,5 @@
-# Day 1 : Introduction to CLoud Computing & Storage STuff
-Learning usecases of Cloud STorage and SQL & NoSQL Storage
+# Day 1 : Introduction to Cloud Computing & Storage STuff
+Learning usecases of Cloud Storage and SQL & NoSQL Storage
 
 ## Unstructured Data Storage
 * Unstructured data is information stored in a non-tabular form, such as documents, images, audio files, emails, social media posts, chats.
@@ -151,3 +151,17 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
    * Data streamed in through various popular **stream processing frameworks** like Dataflow Streaming, Spark Streaming, and Storm.
    * If no streaming, data can also be read from and written to Bigtable through **batch processes** like Hadoop MapReduce, Dataflow, or Spark.
    * BigQuery is different and sits on the edge between data storage and data processing The usual reason to store data in BigQuery is so you can use its big data analysis and interactive querying capabilities. It is not purely a data storage product.
+# Day 5: Using APIs
+ ## Purpose of APIs
+ * A clean well-def interface.
+ * AppDevs structure the software they write so that it presents a clean, well-defined interface that hides unnecessary detail, and then they provide a documentation of that interface. That’s an API. Its underlying implementation can change.
+ * Used to simplify the way different,distinct software resources communicate.
+ * Changes to the API are made with versions: we can specify the version we wanna use in our software.
+ * **REST API**: * A set of constraints that a service must comply with.
+                 * Service complying with REST constraints, said to be RESTful.
+                 * uses HTTP requests to perform GET, PUT, POST, and DELETE data
+                 * REST applies the web architecture to services.
+                 * APIs intended to be spread widely to consumers and deployed to devices with limited computing resources, like mobile, are well suited to a REST structure.       * State information does not need to be stored or referenced for the API to run.
+                 * Great for cloud applications because they are stateless.
+                 * Authentication via OAuth and security by leveraging tokens.
+                  * DIfficulty in deploying and managing APIs: Interface definition language/format, Authentication & Authorization, Management & Scalability to meet demand, Logging and monitoring
