@@ -152,9 +152,9 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
    * If no streaming, data can also be read from and written to Bigtable through **batch processes** like Hadoop MapReduce, Dataflow, or Spark.
    * BigQuery is different and sits on the edge between data storage and data processing The usual reason to store data in BigQuery is so you can use its big data analysis and interactive querying capabilities. It is not purely a data storage product.
 # Day 5: Using APIs
- ## Purpose of APIs
+ ## Purpose of APIs (Application Programming Interfaces)
  * A clean well-def interface.
- * AppDevs structure the software they write so that it presents a clean, well-defined interface that hides unnecessary detail, and then they provide a documentation of that interface. That’s an API. Its underlying implementation can change.
+ * AppDevs structure the software they write so that it presents a clean, well-defined interface that hides unnecessary detail, they provide a documentation of that interface. That’s an API. Its underlying implementation can change.
  * Used to simplify the way different,distinct software resources communicate.
  * Changes to the API are made with versions: we can specify the version we wanna use in our software.
  * **REST API**:
@@ -167,4 +167,15 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
    * Great for cloud applications because they are stateless.
    * Authentication via OAuth and security by leveraging tokens.
  * DIfficulty in deploying and managing APIs: Interface definition language/format, Authentication & Authorization, Management & Scalability to meet demand, Logging and monitoring
+## Apigee API Management
+* A GCP available for developing and managing API proxies
+* has a specific focus on business problems, like rate limiting, quotas, and analytics.
+* many Apigee API Management users provide a software service to other companies.
+* Backend services for Apigee API Management don't have to be in Google Cloud. It just acts as a smart gateway in front of APIs. Our backend(logic,database) can be on AWS, Azure anywhere)
+* Used to take apart legacy apps piece-by-piece. Instead of replacing a large, important application in one move, use Apigee to peel off its services individually. Migrate gradually to microservices without breaking the system at once. Apigee manages the transition. This allows them to stand up microservices to implement each in turn, until the legacy application can finally be retired.
+## Pub/Sub
+* short for Publisher/Subscriber, or publish messages to subscribers.
+* Google Cloud Pub/Sub is a fully-managed, real-time messaging service that enables you to send and receive messages between independent applications. It’s designed for event-driven systems, where services communicate by publishing and subscribing to messages asynchronously.
+* One of the early stages in a data pipeline --> data ingestion --> large amounts of streaming data are received (may not be from single source but from different events happening asynchronously, ex: IoT.
+  * Challenges to 
 
