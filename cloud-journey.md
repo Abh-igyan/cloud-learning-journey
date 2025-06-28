@@ -184,3 +184,19 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
     * it can be hard to distribute event messages (notifications) to the right subscribers. A method is needed to collect streaming data from sensors and send them to subscribers.
     * data can arrive quickly and at high volumes. Services must be able to support this.
     * ensuring that services are reliable and secure, and perform as expected.
+* End-to-end Pub/Sub architecture:
+  
+  ![Screenshot 2025-06-27 104958](https://github.com/user-attachments/assets/833a85c9-3492-402b-afb4-911dac202b71)
+
+  Upstream source data comes in from devices all over the globe and is ingested into Pub/Sub --> Pub/Sub reads, stores, and broadcasts to any subscribers of this data topic that new messages are available --> As a subscriber of Pub/Sub, Dataflow (a google cloud fully managed service for processing and transforming data) can ingest and transform those messages in an elastic streaming pipeline and output the results into an analytics data warehouse like BigQuery --> can connect a data visualization tool, like Looker Studio, to visualize and monitor the results of a pipieline --> AI or ML tool such as Vertex AI to explore the data ...
+  
+* ![Screenshot 2025-06-27 110043](https://github.com/user-attachments/assets/4f9417cf-f994-44c7-ab96-48edae78437a)
+
+  Topic and subscribers are completely decoupled, so they’re free to break without affecting their counterparts.
+
+  e.g., ![Screenshot 2025-06-27 110612](https://github.com/user-attachments/assets/3e332e0c-028b-46e3-ad42-103971bf8def)
+  
+* ![image](https://github.com/user-attachments/assets/4325a560-3319-4bf3-81e6-9a5351d1b4cc)
+
+  Pub/Sub is a good solution to buffer changes for lightly coupled architectures, like this one, that have many different sources and sinks.
+* Pub/Sub supports many different inputs and outputs, and you can even publish.
