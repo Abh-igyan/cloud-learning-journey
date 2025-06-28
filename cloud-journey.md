@@ -167,6 +167,7 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
    * Great for cloud applications because they are stateless.
    * Authentication via OAuth and security by leveraging tokens.
  * DIfficulty in deploying and managing APIs: Interface definition language/format, Authentication & Authorization, Management & Scalability to meet demand, Logging and monitoring
+ * Cloud Endpoints is an API management system supports applications running in App Engine, Google Kubernetes Engine, and Compute Engine?
 ## Apigee API Management
 * A GCP available for developing and managing API proxies
 * has a specific focus on business problems, like rate limiting, quotas, and analytics.
@@ -199,4 +200,46 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
 * ![image](https://github.com/user-attachments/assets/4325a560-3319-4bf3-81e6-9a5351d1b4cc)
 
   Pub/Sub is a good solution to buffer changes for lightly coupled architectures, like this one, that have many different sources and sinks.
-* Pub/Sub supports many different inputs and outputs, and you can even publish.
+* Pub/Sub supports many different inputs and outputs, and you can even publish a Pub/Sub event from one topic to another.
+## Lab   ----Pub/Sub: Qwik Start - Python
+* The Pub/Sub service allows applications to exchange messages reliably, quickly, and asynchronously. To accomplish this, a data producer publishes messages to a Cloud Pub/Sub topic. A subscriber client then creates a subscription to that topic and consumes messages from the subscription. Cloud Pub/Sub persists messages that could not be delivered reliably for up to seven days.
+* Task 1. Create a virtual environment:
+   * Python virtual environments are used to isolate package installation from the system.
+   * Install the virtualenv environment: `sudo apt-get install -y virtualenv`
+   * Build the virtual environment: `python3 -m venv venv`
+   Activate the virtual environment:   `source venv/bin/activate`
+
+* Task 2. Install the client library:
+   * install the client library: `pip install --upgrade google-cloud-pubsub`
+   * Get the sample code by cloning a GitHub repository: `git clone https://github.com/googleapis/python-pubsub.git`
+   * Navigate to the directory: `cd python-pubsub/samples/snippets`
+ 
+* Task 3. Pub/Sub - the Basics:
+  * A topic is a shared string that allows applications to connect with one another through a common thread.
+  * publisher creates and sends messages to a topic and a subscriber creates a subscription to a topic to receive messages from it.
+
+* Task 4. Create a topic:
+   * To publish data to Pub/Sub you create a topic and then configure a publisher to the topic.
+   * In Cloud Shell, your Project ID should automatically be stored in the environment variable GOOGLE_CLOUD_PROJECT: `echo $GOOGLE_CLOUD_PROJECT`
+   * Ensure the output is the same as the Project ID in your CONNECTION DETAILS.
+      publisher.py is a script that demonstrates how to perform basic operations on topics with the Cloud Pub/Sub API.
+   * View the content of publisher script:   `cat publisher.py`
+   * For information about the publisher script: `python publisher.py -h`
+   * Run the publisher script to create Pub/Sub Topic: `python publisher.py $GOOGLE_CLOUD_PROJECT create MyTopic`
+   * This command returns a list of all Pub/Sub topics in a given project: `python publisher.py $GOOGLE_CLOUD_PROJECT list`
+   * viewing the topic just made in the Cloud Console. Navigate to Navigation menu > Pub/Sub > Topics.
+     
+* Task 5. Create a subscription:
+   * Create a Pub/Sub subscription for topic with subscriber.py script: `python subscriber.py $GOOGLE_CLOUD_PROJECT create MyTopic MySub`
+   * This command returns a list of subscribers in given project: `python subscriber.py $GOOGLE_CLOUD_PROJECT list-in-project`
+   * For information about the subscriber script: `python subscriber.py -h`
+  
+* Task 6. Publish messages:
+   * Publish the message "Hello" to MyTopic: `gcloud pubsub topics publish MyTopic --message "Hello"`
+   * Publish a few more messages to MyTopic—run the following commands (replacing <YOUR NAME> with your name and <FOOD> with a food you like to eat):
+      * `gcloud pubsub topics publish MyTopic --message "Publisher's name is <YOUR NAME>"`
+      * `gcloud pubsub topics publish MyTopic --message "Publisher likes to eat <FOOD>"`
+      * `gcloud pubsub topics publish MyTopic --message "Publisher thinks Pub/Sub is awesome"`
+* Task 7. View messages:
+   * Use MySub to pull the message from MyTopic: `python subscriber.py $GOOGLE_CLOUD_PROJECT receive MySub`
+   * Ctrl+C to stop listening
