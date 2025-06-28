@@ -176,6 +176,11 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
 ## Pub/Sub
 * short for Publisher/Subscriber, or publish messages to subscribers.
 * Google Cloud Pub/Sub is a fully-managed, real-time messaging service that enables you to send and receive messages between independent applications. It’s designed for event-driven systems, where services communicate by publishing and subscribing to messages asynchronously.
-* One of the early stages in a data pipeline --> data ingestion --> large amounts of streaming data are received (may not be from single source but from different events happening asynchronously, ex: IoT.
-  * Challenges to 
-
+* ensures at-least-once delivery of received messages to subscribing applications, with no provisioning required.
+* Its APIs are open, the service is global by default, and it offers end-to-end encryption.
+* One of the early stages in a data pipeline --> data ingestion --> large amounts of streaming data are received (may not be from single source but from different events happening asynchronously), ex: IoT.
+  * These IoT devices present new challenges to data ingestion:
+    * data can be streamed from many different methods and devices which might not talk to each other
+    * it can be hard to distribute event messages (notifications) to the right subscribers. A method is needed to collect streaming data from sensors and send them to subscribers.
+    * data can arrive quickly and at high volumes. Services must be able to support this.
+    * ensuring that services are reliable and secure, and perform as expected.
