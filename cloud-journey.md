@@ -250,4 +250,10 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
    * **Hardware Infrastructure**: Hardware design and provenance, Secure boot stack & Premises security
    * **Service Deployment Layer**: Encryption of inter-service communication, User Identity
    * **Storage services layer**: file storage (encryption using Centrally managed keys), Hardware encryption support in HDDs/SSDs
-   * **Internet Communication Layer**: 
+   * **Internet Communication Layer**: Google Front End (ensuring all services are certified and follow best practices such as supporting perfect forward secrecy. Applying protection against Denial of Service DoS attacks), DoS protection (Google also has multi-tier, multi-layer DoS protections that further reduce the risk of any DoS impact on a service running behind a GFE.)
+   * **Operational security layer**: Instrusion detection, reducing insider risk, employee U2F use, software dev. practices
+   ##  Vulnerability Rewards Program by Google where anyone who can discover and inform us of bugs in the infrastructure or applications is paid.
+   ## The Shared Security Model
+   * Security responsibilities are shared between the customer and Google Cloud.
+   * ![image](https://github.com/user-attachments/assets/9ac4aa06-f749-41e0-a5a7-0e21366a97e3)
+   * 
