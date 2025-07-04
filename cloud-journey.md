@@ -245,7 +245,7 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
    * Ctrl+C to stop listening
 
 
-# Day 6: Securing the Cloud -
+# Day 6: Security in Cloud
    ## Five layers of protection provided by GOOGLE for data safety (in increasing order):
    * **Hardware Infrastructure**: Hardware design and provenance, Secure boot stack & Premises security
    * **Service Deployment Layer**: Encryption of inter-service communication, User Identity
@@ -255,5 +255,20 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
    ##  Vulnerability Rewards Program by Google where anyone who can discover and inform us of bugs in the infrastructure or applications is paid.
    ## The Shared Security Model
    * Security responsibilities are shared between the customer and Google Cloud.
+   * When customer deploys an application to their on-premises infrastructure, they are responsible for the security of the entire stack: from the physical security of the hardware and the premises to securing the content stored in those applications.
+   * But when they move an application to Google Cloud, Google handles many of the lower layers of security, like the physical security, disk encryption, and network integrity. The upper layers of the security stack, including the securing of data, remain the customer’s responsibility. They control who or what has access to their data.
+   * Google Cloud provides tools that help them control this access, such as Identity and Access Management, but they must be properly configured to protect your data.
    * ![image](https://github.com/user-attachments/assets/9ac4aa06-f749-41e0-a5a7-0e21366a97e3)
-   * 
+   ## Encryption Options:
+   * ![image](https://github.com/user-attachments/assets/96dec2a7-078b-43fe-be0b-666b73edbf4b)
+   * **Client-side encryption**: last option is to encrypt your data locally before you store it in the cloud. 
+Neither the unencrypted data nor the decryption keys leave their local device.
+   * **Default encryption**: happens automatically ![image](https://github.com/user-attachments/assets/ae458a52-797f-4db5-b488-5c9d3ec5a1ee)
+   * **CMEK**:
+     * Cloud Key Management Service (KMS) automates and simplifies the generation and management of encryption keys. Supports encryption, decryption, signing, and verification of data. Supports automated and at-will key rotation, both symmetric and asymmetric cryptographic keys and various popular algorithms.
+     * The keys are managed by the customer and never leave the cloud.
+   * **CSEK**: ![image](https://github.com/user-attachments/assets/8b7d3d38-1263-4a76-9142-81aa96a52190)
+     * the key only exists in-memory and is discarded after use.
+     * Persistent disks, such as those that back virtual machines, can be encrypted with CSEK. data is encrypted before it leaves the virtual machine. 
+Even without CSEK or CMEK, persistent disks are still encrypted. When a persistent disk is deleted, the keys are discarded, and the data is rendered irrecoverable by traditional means.
+    * Other encryption options: CLIENT SIDE & DISK ENCRYPTION (create own persistent disks and redundantly encrypting them)
