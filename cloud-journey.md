@@ -271,4 +271,4 @@ Neither the unencrypted data nor the decryption keys leave their local device.
      * the key only exists in-memory and is discarded after use.
      * Persistent disks, such as those that back virtual machines, can be encrypted with CSEK. data is encrypted before it leaves the virtual machine. 
 Even without CSEK or CMEK, persistent disks are still encrypted. When a persistent disk is deleted, the keys are discarded, and the data is rendered irrecoverable by traditional means.
-    * Other encryption options: CLIENT SIDE & DISK ENCRYPTION (create own persistent disks and redundantly encrypting them)
+   * Other encryption options: CLIENT SIDE & DISK ENCRYPTION (create own persistent disks and redundantly encrypting them)
