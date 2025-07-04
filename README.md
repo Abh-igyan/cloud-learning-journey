@@ -18,7 +18,7 @@ This repo contains my day-by-day notes, project experiments, and badges earned t
 
 ## 📂 Projects
 
-### 🔹 [Static Website Hosting](project1/)
+### 🔹 [Static Website Hosting](https://storage.googleapis.com/my_bucket_24/index.html)
 - Built using: HTML + CSS + JavaScript
 - Deployed on: Google Cloud Platform
 - Features: basic
@@ -27,7 +27,7 @@ This repo contains my day-by-day notes, project experiments, and badges earned t
 
 ## 🏅 Badges
 
-![Badge](coming soon)
+(coming soon)
 
 ---
 
