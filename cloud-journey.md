@@ -243,3 +243,11 @@ Go to navigation >  SQL > Instances > Create Instance > Choose MySQL > select En
 * Task 7. View messages:
    * Use MySub to pull the message from MyTopic: `python subscriber.py $GOOGLE_CLOUD_PROJECT receive MySub`
    * Ctrl+C to stop listening
+
+
+# Day 6: Securing the Cloud -
+   ## Five layers of protection provided by GOOGLE for data safety (in increasing order):
+   * **Hardware Infrastructure**: Hardware design and provenance, Secure boot stack & Premises security
+   * **Service Deployment Layer**: Encryption of inter-service communication, User Identity
+   * **Storage services layer**: file storage (encryption using Centrally managed keys), Hardware encryption support in HDDs/SSDs
+   * **Internet Communication Layer**: 
