@@ -272,3 +272,25 @@ Neither the unencrypted data nor the decryption keys leave their local device.
      * Persistent disks, such as those that back virtual machines, can be encrypted with CSEK. data is encrypted before it leaves the virtual machine. 
 Even without CSEK or CMEK, persistent disks are still encrypted. When a persistent disk is deleted, the keys are discarded, and the data is rendered irrecoverable by traditional means.
    * Other encryption options: CLIENT SIDE & DISK ENCRYPTION (create own persistent disks and redundantly encrypting them)
+   ## Improving security using authentication and authorization with IAM:
+   * An organization node contains lots of folders, projects, and resources -> need to restrict access -> IAM comes -> admin decides who can do what on which resources
+   * The “who” part of an IAM policy can be a Google Account, a Google group, a service account, or Cloud Identity domain.
+   * The “can do what” part of an IAM policy is defined by a role (a collection of permissions). E.g create, delete, start, stop, and change virtual machines in a project.
+   * ![image](https://github.com/user-attachments/assets/3042bd1b-ad65-4fde-86d6-b1d7c7041cb5)
+   * ![image](https://github.com/user-attachments/assets/f348bec9-56c2-44ee-a1a3-88e1ba988fcf)
+   * IAM checks deny policies before allow policies. Deny policies, like allow policies, are inherited through the resource hierarchy.
+   * With a tool called **Cloud Identity**, organizations can define policies and manage their users and groups by using the Google Admin console. -- Admins can log in and manage Google Cloud resources by using the same usernames and passwords they already use in existing Active Directory -- if someone leaves they can disable their account.
+   * Admins can log in and manage Google Cloud resources by using the same usernames and passwords they already use in existing Active Directory
+   ### Three kinds of roles in IAM: basic, predefined, and custom
+   * Basic roles: broad in scope - when applied they affect all resources in the project - Basic roles include owner, editor, viewer, and billing administrator.
+      * project owners can also examine and modify a resourceand also can manage the associate roles and permissions, and set up billing.
+      * Billing admins control the billing for a project, but don't have permissions to change the resources in the project.
+   * Predefined roles: permissions that are more specifically tailored to meet the needs of typical job roles.
+      * Specific Google Cloud services offer sets of predefined roles, and they even define where those roles can be applied. Let’s take Compute Engine, a Google Cloud product that offers virtual machines as a service. E.g., offers instanvceAdmin role
+   * Custom roles: ![image](https://github.com/user-attachments/assets/7a326510-4bf0-4ce6-9e50-c88988283e46)
+   * Before you start creating custom roles, please note:
+     * you must manage the permissions that comprise the custom role you’ve created.
+     * custom roles can only be applied to either project or organization level (not folder level).
+     * Service accounts are named with an email address and cryptographic keys(not pass).
+     * 
+
