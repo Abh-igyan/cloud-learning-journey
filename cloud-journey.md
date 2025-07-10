@@ -296,3 +296,12 @@ Even without CSEK or CMEK, persistent disks are still encrypted. When a persiste
       * Service accounts are named with an email address and cryptographic keys(not pass).
       * So, if a service account has been granted Compute Engine’s **Instance Admin** role, this would allow an application that runs in a VM with that service account to create, modify, and delete other VMs.
       * A service account is also a resource! So it can have IAM policies of its own attached to it.
+# Day 8
+   ## Lab: User Authentication by IAP-
+   * Identity-Aware Proxy is a resource that can be used to set up authentication to https-based applications without the use of VPNs. Establishes a central authorization layer for applications over TLS, so you can use an application-level access control model instead of relying on network-level firewalls.
+   * Only users and groups can access applications and resources protected by IAP through the proxy with the correct IAM role.
+   * IAP performs authentication and authorization checks when a user tries to access a IAP-secured resource.
+   * IAP secures authentication and authorization of external requests through TLS.
+   * IAP doesn't protect against activities inside your VM, such as if someone uses SSH to access the VM. And also within a project, such as VM-to-VM communication within your project over the local network.
+   * building a minimal web app with Google App Engine, then explore various ways to use Identity-Aware Proxy (IAP) to restrict access to the app and provide user identity information to it.
+   * 
