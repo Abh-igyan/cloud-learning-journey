@@ -306,16 +306,16 @@ Even without CSEK or CMEK, persistent disks are still encrypted. When a persiste
    * IAP secures authentication and authorization of external requests through TLS.
    * IAP doesn't protect against activities inside your VM, such as if someone uses SSH to access the VM. And also within a project, such as VM-to-VM communication within your project over the local network.
    * building a minimal python based web app(displays hello world welcome page) with Google App Engine, and using IAP to restrict access to the app and provide user identity information to it.
-     * If I've a .zip file of my app, I may download the file then:
+   * If I've a .zip file of my app, I may download the file then:
        ```unzip user-authentication-with-iap.zip```
       ``` cd user-authentication-with-iap```
-      * Task 1. Deploy the application and protect it with IAP
+   * **Task 1. Deploy the application and protect it with IAP**
         * Deploy to App Engine:
         * Update python runtime to python39: `sed -i 's/python37/python39/g' app.yaml`
         * Deploy the app to the App Engine Standard environment for Python: `gcloud app deploy`
         * Select a region `REGION` When you are asked if you want to continue, enter Y for yes.
         * Once deployment completes, view app: `gcloud app browse`
-      * Restrict access with IAP
+        * Restrict access with IAP
             * In the cloud console window, click the Navigation menu Navigation menu icon > Security > Identity-Aware Proxy.
             * Click Enable API.            
             * Click Go to Identity Aware Proxy.            
@@ -340,4 +340,36 @@ Even without CSEK or CMEK, persistent disks are still encrypted. When a persiste
         * Then, pick the Cloud IAP > IAP-Secured Web App User role to assign to that address.
         * ![image](https://github.com/user-attachments/assets/344d8a36-8a87-452d-b6fe-7663b2d8a38f)
         * Navigate back to your app and reload the page. You should now see your web app, since you already logged in with a user you authorized.
-      * Task 2. Access user identity information
+   * **Task 2. Access user identity information**
+        * the application will get the logged-in user's email address and a persistent unique user ID assigned by the Google Identity Service to that user. That data will be displayed to the user in the welcome page.
+        * In Cloud Shell, change to the folder for this step:cd  `~/user-authentication-with-iap/2-HelloUser`
+        * Update python runtime to 39: `sed -i 's/python37/python39/g' app.yaml`
+        * `gcloud app deploy`
+        * `gcloud app browse`
+        * Now if we open the webapp, we'll get our user info displayed. If we turn off IAP, we'll see the same screen but with no user info.
+        * Since the application is now unprotected, a user could send a web request that appeared to have passed through IAP. For example, you can run the following curl command from the Cloud Shell to do that: `curl -X GET <your-url-here> -H "X-Goog-Authenticated-User-Email: totally fake email"`
+        * The web page will be displayed on the command line. There is no way for the application to know that IAP has been disabled or bypassed. For cases where that is a potential risk, Cryptographic Verification is used.
+   * **Task 3. Use Cryptographic Verification**
+        * If there is a risk of IAP being turned off or bypassed, your app can check to make sure the identity information it receives is valid. This uses a third web request header added by IAP, called **X-Goog-IAP-JWT-Assertion**. The value of the header is a cryptographically signed object that also contains the user identity data. Your application can verify the digital signature (requires several extra steps, such as retrieving the latest set of Google public keys) and use the data provided in this object to be certain that it was provided by IAP without alteration.
+        * In Cloud Shell, change to the folder for this step: `cd ~/user-authentication-with-iap/3-HelloVerifiedUser`
+        * change python runtime and deploy the app.
+        * E.g., of user() method to retrieve and verify the cryptographically signed identity information:
+    ```def user():
+          assertion = request.headers.get('X-Goog-IAP-JWT-Assertion')
+          if assertion is None:
+              return None, None
+          info = jwt.decode(
+              assertion,
+              keys(),
+              algorithms=['ES256'],
+              audience=audience()
+          )
+          return info['email'], info['sub']```
+        * The `assertion` is the cryptographically signed data provided in the specified request header
+        * Validation uses the public keys that Google provides for checking data it signs, and knowing the audience that the data was prepared for (essentially, the Google Cloud project that is being protected). Helper functions `keys()` and `audience()` gather and return those values.
+        * The signed object has two pieces of data we need: the verified email address, and the unique ID value (provided in the `sub`, for subscriber, standard field).
+        * after deployment, `gcloud app browse`
+        * Open link: no IAP info is visible (since iap disabled).
+        * Enable it, verified email and ID of user will be visible.
+   * Summary:  deployed an App Engine web application. First, you restricted access to the application to only users you chose. Then you retrieved and displayed the identity of users that IAP allowed access to your application, and saw how that information might be spoofed if IAP were disabled or bypassed. Lastly, you verified cryptographically signed assertions of the user's identity, which cannot be spoofed.
+
