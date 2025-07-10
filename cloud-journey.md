@@ -298,10 +298,46 @@ Even without CSEK or CMEK, persistent disks are still encrypted. When a persiste
       * A service account is also a resource! So it can have IAM policies of its own attached to it.
 # Day 8
    ## Lab: User Authentication by IAP-
-   * Identity-Aware Proxy is a resource that can be used to set up authentication to https-based applications without the use of VPNs. Establishes a central authorization layer for applications over TLS, so you can use an application-level access control model instead of relying on network-level firewalls.
+   * is a Google Cloud service that intercepts web requests sent to your application, authenticates the user making the request using the Google Identity Service, and only lets the requests through if they come from a user you authorize. In addition, it can modify the request headers to include information about the authenticated user.
+   * IAP is a resource that can be used to set up authentication to https-based applications without the use of VPNs. 
+   * Establishes a central authorization layer for applications over TLS, so you can use an application-level access control model instead of relying on network-level firewalls.
    * Only users and groups can access applications and resources protected by IAP through the proxy with the correct IAM role.
    * IAP performs authentication and authorization checks when a user tries to access a IAP-secured resource.
    * IAP secures authentication and authorization of external requests through TLS.
    * IAP doesn't protect against activities inside your VM, such as if someone uses SSH to access the VM. And also within a project, such as VM-to-VM communication within your project over the local network.
-   * building a minimal web app with Google App Engine, then explore various ways to use Identity-Aware Proxy (IAP) to restrict access to the app and provide user identity information to it.
-   * 
+   * building a minimal python based web app(displays hello world welcome page) with Google App Engine, and using IAP to restrict access to the app and provide user identity information to it.
+     * If I've a .zip file of my app, I may download the file then:
+       ```unzip user-authentication-with-iap.zip```
+      ``` cd user-authentication-with-iap```
+      * Task 1. Deploy the application and protect it with IAP
+        * Deploy to App Engine:
+        * Update python runtime to python39: `sed -i 's/python37/python39/g' app.yaml`
+        * Deploy the app to the App Engine Standard environment for Python: `gcloud app deploy`
+        * Select a region `REGION` When you are asked if you want to continue, enter Y for yes.
+        * Once deployment completes, view app: `gcloud app browse`
+      * Restrict access with IAP
+            * In the cloud console window, click the Navigation menu Navigation menu icon > Security > Identity-Aware Proxy.
+            * Click Enable API.            
+            * Click Go to Identity Aware Proxy.            
+            * To configure your project's OAuth consent screen, go to the OAuth consent screen            
+            * Click Get Started.            
+            * For App name, enter `IAP Example`.            
+            * Click User support email, and then click the student email and then click Next.            
+            * For Audience, select Internal, and then click Next.            
+            * Users with access to the project should be able to log in to the app.            
+            * On the left panel of the lab instructions, copy the Username.            
+            * For Contact information, paste the copied username.            
+            * Click Next.            
+            * Click Checkbox to agree the User Data Policy and click Continue and then click Create. The consent screen is now set up.            
+            * In Cloud Shell, run this command to disable the Flex API:   `gcloud services disable appengineflex.googleapis.com`
+            * Return to the IAP page and refresh it. You should now see a list of resources you can protect. Click the toggle button in the IAP column in the App Engine app row to turn IAP on.
+            * The domain will be protected by IAP. Click Turn On.
+        * Now no email id will be able to access that webapp (since we have not yet told IAP which accounts to allow through.)
+        * Return to the IAP page of the console, select the checkbox next to App Engine app, and see the App Engine sidebar to the right.
+        * Each email address (or Google Group address, or Workspace domain name) that should be allowed access needs to be added as a Member.
+        * Click Add Principal.
+        * Enter your Student email address.
+        * Then, pick the Cloud IAP > IAP-Secured Web App User role to assign to that address.
+        * ![image](https://github.com/user-attachments/assets/344d8a36-8a87-452d-b6fe-7663b2d8a38f)
+        * Navigate back to your app and reload the page. You should now see your web app, since you already logged in with a user you authorized.
+      * Task 2. Access user identity information
