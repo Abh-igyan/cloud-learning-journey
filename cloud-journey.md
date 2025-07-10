@@ -272,6 +272,7 @@ Neither the unencrypted data nor the decryption keys leave their local device.
      * Persistent disks, such as those that back virtual machines, can be encrypted with CSEK. data is encrypted before it leaves the virtual machine. 
 Even without CSEK or CMEK, persistent disks are still encrypted. When a persistent disk is deleted, the keys are discarded, and the data is rendered irrecoverable by traditional means.
    * Other encryption options: CLIENT SIDE & DISK ENCRYPTION (create own persistent disks and redundantly encrypting them)
+# Day 7
    ## Improving security using authentication and authorization with IAM:
    * An organization node contains lots of folders, projects, and resources -> need to restrict access -> IAM comes -> admin decides who can do what on which resources
    * The “who” part of an IAM policy can be a Google Account, a Google group, a service account, or Cloud Identity domain.
@@ -288,9 +289,10 @@ Even without CSEK or CMEK, persistent disks are still encrypted. When a persiste
    * Predefined roles: permissions that are more specifically tailored to meet the needs of typical job roles.
       * Specific Google Cloud services offer sets of predefined roles, and they even define where those roles can be applied. Let’s take Compute Engine, a Google Cloud product that offers virtual machines as a service. E.g., offers instanvceAdmin role
    * Custom roles: ![image](https://github.com/user-attachments/assets/7a326510-4bf0-4ce6-9e50-c88988283e46)
-   * Before you start creating custom roles, please note:
-     * you must manage the permissions that comprise the custom role you’ve created.
-     * custom roles can only be applied to either project or organization level (not folder level).
-     * Service accounts are named with an email address and cryptographic keys(not pass).
-     * 
-
+      * Before you start creating custom roles, please note:
+        * you must manage the permissions that comprise the custom role you’ve created.
+        * custom roles can only be applied to either project or organization level (not folder level).
+      * App running in VM needs to store data in cloud. If we wanna restrict access to that data only to that VM, we create a service account to authenticate that VM to Cloud Storage.
+      * Service accounts are named with an email address and cryptographic keys(not pass).
+      * So, if a service account has been granted Compute Engine’s **Instance Admin** role, this would allow an application that runs in a VM with that service account to create, modify, and delete other VMs.
+      * A service account is also a resource! So it can have IAM policies of its own attached to it.
