@@ -372,4 +372,5 @@ Even without CSEK or CMEK, persistent disks are still encrypted. When a persiste
         * Open link: no IAP info is visible (since iap disabled).
         * Enable it, verified email and ID of user will be visible.
    * Summary:  deployed an App Engine web application. First, you restricted access to the application to only users you chose. Then you retrieved and displayed the identity of users that IAP allowed access to your application, and saw how that information might be spoofed if IAP were disabled or bypassed. Lastly, you verified cryptographically signed assertions of the user's identity, which cannot be spoofed.
-
+# Day 9
+## IAM Authorization best practices
