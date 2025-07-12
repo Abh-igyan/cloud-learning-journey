@@ -284,7 +284,7 @@ Even without CSEK or CMEK, persistent disks are still encrypted. When a persiste
    * Admins can log in and manage Google Cloud resources by using the same usernames and passwords they already use in existing Active Directory
    ### Three kinds of roles in IAM: basic, predefined, and custom
    * Basic roles: broad in scope - when applied they affect all resources in the project - Basic roles include owner, editor, viewer, and billing administrator.
-      * project owners can also examine and modify a resourceand also can manage the associate roles and permissions, and set up billing.
+      * project owners can also examine and modify a resource and also can manage the associate roles and permissions, and set up billing.
       * Billing admins control the billing for a project, but don't have permissions to change the resources in the project.
    * Predefined roles: permissions that are more specifically tailored to meet the needs of typical job roles.
       * Specific Google Cloud services offer sets of predefined roles, and they even define where those roles can be applied. Let’s take Compute Engine, a Google Cloud product that offers virtual machines as a service. E.g., offers instanvceAdmin role
@@ -374,3 +374,14 @@ Even without CSEK or CMEK, persistent disks are still encrypted. When a persiste
    * Summary:  deployed an App Engine web application. First, you restricted access to the application to only users you chose. Then you retrieved and displayed the identity of users that IAP allowed access to your application, and saw how that information might be spoofed if IAP were disabled or bypassed. Lastly, you verified cryptographically signed assertions of the user's identity, which cannot be spoofed.
 # Day 9
 ## IAM Authorization best practices
+ * Granting roles to groups instead of individuals. This lets you update group memberships instead of changing an IAM policy.
+ * AFter doing this, we must make sure to audit memberships of groups used in policies and control the ownership of the Google group used in IAM policies.
+ * This example shows a network admin group. Some of those members also need a read_write role, which allows them to read and write to a Cloud Storage bucket, but others need the read_only role. Adding and removing individuals from all three groups controls their total access.
+ * <img width="1429" height="735" alt="image" src="https://github.com/user-attachments/assets/823462e7-effd-466a-b895-3506b7d3f853" />
+ * <img width="1543" height="719" alt="image" src="https://github.com/user-attachments/assets/e1a5e888-6d87-48f5-87a6-1b2db9dd1b60" />
+ 
+## Lab: Cloud IAM: Qwik Start 
+ * Explore the IAM console and project level roles: Select Navigation menu > IAM & Admin > IAM. You are now in the "IAM & Admin" console. Scroll down to Basic in Select a role section, select roles.
+ * If a USER has the viewer role. The +GRANT ACCESS button is grayed out for him. He won't be able to grant roles to anyone
+ * **Granting CLoud access role to a user**: In the Console, select Navigation menu > IAM & Admin > IAM. Click +GRANT ACCESS button and paste the Username 2 name into the New principals field. In the Select a role field, select Cloud Storage > Storage Object Viewer from the drop-down menu. Click SAVE.
+ * Now that user will have cloud storage access: `gsutil ls gs://[YOUR_BUCKET_NAME]` will return bucket details if created already.
